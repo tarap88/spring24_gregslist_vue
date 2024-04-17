@@ -33,7 +33,7 @@ onMounted(() => {
     </section>
 
     <section class="row">
-      <div v-for="car in cars" :key="car.id" class="col-12">
+      <div v-for="car in cars" :key="car.id" class="col-12 mb-3">
         <CarCard :car="car" />
       </div>
     </section>
