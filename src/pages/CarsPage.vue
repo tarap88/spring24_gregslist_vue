@@ -4,6 +4,7 @@ import { carsService } from '../services/CarsService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import CarCard from '../components/CarCard.vue';
+import CarFormModal from '../components/CarFormModal.vue';
 
 const cars = computed(() => AppState.cars)
 const account = computed(() => AppState.account)

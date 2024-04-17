@@ -5,7 +5,7 @@ import Pop from '../utils/Pop.js';
 import { carsService } from '../services/CarsService.js';
 import { Modal } from 'bootstrap';
 
-// NOTE allows us to v-for over this array for options
+// NOTE allows us to v-for over this array for options inside of select
 const engineTypes = [
   "unknown",
   "2 stroke",
@@ -20,6 +20,7 @@ const engineTypes = [
   "chuncko"
 ]
 
+// NOTE ref is instantiated with an object with default values that we want present in our form
 const editableCarData = ref({
   make: '',
   model: '',
@@ -34,8 +35,8 @@ const editableCarData = ref({
 async function createCar() {
   try {
     logger.log('Creating car! 🚗', editableCarData)
-    // NOTE .value pulls out the data stored inside of the ref object (whatever is inside the parentheses)
 
+    // NOTE .value pulls out the data stored inside of the ref object (whatever is inside the parentheses)
     await carsService.createCar(editableCarData.value)
 
     // NOTE form.reset()
