@@ -27,8 +27,12 @@ onMounted(() => {
 <template>
   <div class="container">
     <section class="row">
-      <div class="col-12 mt-3">
+      <div class="col-12 mt-3 d-flex align-items-center gap-4">
         <h1>Cars</h1>
+        <button class="btn btn-outline-dark" title="Create a new car listing!" data-bs-toggle="modal"
+          data-bs-target="#carFormModal">
+          <i class="mdi mdi-plus"></i>
+        </button>
       </div>
     </section>
 
@@ -38,6 +42,8 @@ onMounted(() => {
       </div>
     </section>
   </div>
+
+  <CarFormModal />
 </template>
 
 
