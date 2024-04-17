@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue';
 import { carsService } from '../services/CarsService.js';
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
+import CarCard from '../components/CarCard.vue';
 
 const cars = computed(() => AppState.cars)
 
@@ -32,8 +33,8 @@ onMounted(() => {
     </section>
 
     <section class="row">
-      <div class="col-12">
-        {{ cars }}
+      <div v-for="car in cars" :key="car.id" class="col-12">
+        <CarCard :car="car" />
       </div>
     </section>
   </div>
