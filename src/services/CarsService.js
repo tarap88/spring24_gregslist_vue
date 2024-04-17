@@ -12,7 +12,7 @@ class CarsService {
 
     const carIndex = cars.findIndex(car => car.id == carId)
 
-    if (carIndex == -1) throw new Error("You messed on findIndex, big dawg")
+    if (carIndex == -1) throw new Error("You messed up on findIndex, big dawg")
 
     cars.splice(carIndex, 1)
   }
