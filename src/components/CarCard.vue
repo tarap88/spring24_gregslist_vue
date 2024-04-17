@@ -1,9 +1,26 @@
 <script setup>
 import { Car } from '../models/Car.js';
+import { carsService } from '../services/CarsService.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
 
 defineProps({
   car: Car
 })
+
+async function destroyCar(carId) {
+  try {
+    const wantsToDestroy = await Pop.confirm("Are you sure you want to delete that car?")
+
+    if (!wantsToDestroy) return
+
+    logger.log('DESTROYING CAR 🚗🗑️', carId)
+
+    await carsService.destroyCar(carId)
+  } catch (error) {
+    Pop.error(error)
+  }
+}
 </script>
 
 
@@ -15,6 +32,10 @@ defineProps({
       <h3 class="fs-5">${{ car.price }}</h3>
       <p>Listed on {{ car.createdAt.toLocaleDateString() }} by {{ car.creator.name }}</p>
       <p>{{ car.description }}</p>
+      <button @click="destroyCar(car.id)" class="btn btn-outline-danger"
+        :title="`Send the ${car.make} ${car.model} to the scrapyard`">
+        <i class="mdi mdi-car-off"></i>
+      </button>
     </div>
   </div>
 </template>

@@ -4,13 +4,17 @@ import { logger } from "../utils/Logger.js";
 import { api } from "./AxiosService.js"
 
 class CarsService {
+  async destroyCar(carId) {
+    const response = await api.delete(`api/cars/${carId}`)
+    logger.log('DESTROYED CAR 💥🧨💣', response.data)
+  }
   async createCar(carData) {
     const response = await api.post('api/cars', carData)
     logger.log('CREATED CAR 🚓🔧', response.data)
     const newCar = new Car(response.data)
-    // Unshift if data is sorted newest to oldest
+    // unshift if data is sorted newest to oldest
     AppState.cars.unshift(newCar)
-    // poush if data is sorted oldest to newest
+    // push if data is sorted oldest to newest
     // AppState.cars.push(newCar)
   }
   async getCars() {
