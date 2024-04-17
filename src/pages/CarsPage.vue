@@ -6,7 +6,7 @@ import { AppState } from '../AppState.js';
 import CarCard from '../components/CarCard.vue';
 
 const cars = computed(() => AppState.cars)
-
+const account = computed(() => AppState.account)
 
 async function getCars() {
   try {
@@ -29,7 +29,8 @@ onMounted(() => {
     <section class="row">
       <div class="col-12 mt-3 d-flex align-items-center gap-4">
         <h1>Cars</h1>
-        <button class="btn btn-outline-dark" title="Create a new car listing!" data-bs-toggle="modal"
+        <!-- NOTE v-if="account != null" if the user is logged in, show the button -->
+        <button v-if="account" class="btn btn-outline-dark" title="Create a new car listing!" data-bs-toggle="modal"
           data-bs-target="#carFormModal">
           <i class="mdi mdi-plus"></i>
         </button>
