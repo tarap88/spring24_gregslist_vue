@@ -19,7 +19,16 @@ const engineTypes = [
   "chuncko"
 ]
 
-const editableCarData = ref({})
+const editableCarData = ref({
+  make: '',
+  model: '',
+  year: 0,
+  price: 0,
+  engineType: 'unknown',
+  color: '',
+  description: '',
+  imgUrl: ''
+})
 
 async function createCar() {
   try {
