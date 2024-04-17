@@ -7,6 +7,14 @@ class CarsService {
   async destroyCar(carId) {
     const response = await api.delete(`api/cars/${carId}`)
     logger.log('DESTROYED CAR 💥🧨💣', response.data)
+
+    const cars = AppState.cars
+
+    const carIndex = cars.findIndex(car => car.id == carId)
+
+    if (carIndex == -1) throw new Error("You messed on findIndex, big dawg")
+
+    cars.splice(carIndex, 1)
   }
   async createCar(carData) {
     const response = await api.post('api/cars', carData)
