@@ -35,6 +35,18 @@ async function createCar() {
     logger.log('Creating car! 🚗', editableCarData)
     // NOTE .value pulls out the data stored inside of the ref object (whatever is inside the parentheses)
     await carsService.createCar(editableCarData.value)
+
+    // NOTE form.reset()
+    editableCarData.value = {
+      make: '',
+      model: '',
+      year: 0,
+      price: 0,
+      engineType: 'unknown',
+      color: '',
+      description: '',
+      imgUrl: ''
+    }
   }
   catch (error) {
     Pop.error(error);
