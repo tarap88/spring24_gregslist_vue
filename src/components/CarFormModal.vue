@@ -3,6 +3,7 @@ import { logger } from '../utils/Logger.js';
 import { ref } from 'vue'
 import Pop from '../utils/Pop.js';
 import { carsService } from '../services/CarsService.js';
+import { Modal } from 'bootstrap';
 
 // NOTE allows us to v-for over this array for options
 const engineTypes = [
@@ -25,7 +26,7 @@ const editableCarData = ref({
   year: 0,
   price: 0,
   engineType: 'unknown',
-  color: '',
+  color: '#000000',
   description: '',
   imgUrl: ''
 })
@@ -34,6 +35,7 @@ async function createCar() {
   try {
     logger.log('Creating car! 🚗', editableCarData)
     // NOTE .value pulls out the data stored inside of the ref object (whatever is inside the parentheses)
+
     await carsService.createCar(editableCarData.value)
 
     // NOTE form.reset()
@@ -43,10 +45,13 @@ async function createCar() {
       year: 0,
       price: 0,
       engineType: 'unknown',
-      color: '',
+      color: '#000000',
       description: '',
       imgUrl: ''
     }
+
+    // NOTE closes Modal after submit
+    Modal.getOrCreateInstance('#carFormModal').hide()
   }
   catch (error) {
     Pop.error(error);
@@ -108,7 +113,7 @@ async function createCar() {
             <div class="mb-3">
               <label for="carColor" class="form-label">Car Color</label>
               <input v-model="editableCarData.color" type="color" class="form-control form-control-color" id="carColor"
-                value="#563d7c" title="Choose your color">
+                title="Choose your color">
 
             </div>
 
