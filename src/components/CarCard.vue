@@ -1,12 +1,16 @@
 <script setup>
+import { computed } from 'vue';
 import { Car } from '../models/Car.js';
 import { carsService } from '../services/CarsService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import { AppState } from '../AppState.js';
 
 defineProps({
   car: Car
 })
+
+const account = computed(() => AppState.account)
 
 async function destroyCar(carId) {
   try {
@@ -32,7 +36,7 @@ async function destroyCar(carId) {
       <h3 class="fs-5">${{ car.price }}</h3>
       <p>Listed on {{ car.createdAt.toLocaleDateString() }} by {{ car.creator.name }}</p>
       <p>{{ car.description }}</p>
-      <button @click="destroyCar(car.id)" class="btn btn-outline-danger"
+      <button v-if="car.creatorId == account?.id" @click="destroyCar(car.id)" class="btn btn-outline-danger"
         :title="`Send the ${car.make} ${car.model} to the scrapyard`">
         <i class="mdi mdi-car-off"></i>
       </button>
