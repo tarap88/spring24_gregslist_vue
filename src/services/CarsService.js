@@ -20,8 +20,10 @@ class CarsService {
     const response = await api.post('api/cars', carData)
     logger.log('CREATED CAR 🚓🔧', response.data)
     const newCar = new Car(response.data)
+
     // unshift if data is sorted newest to oldest
     AppState.cars.unshift(newCar)
+
     // push if data is sorted oldest to newest
     // AppState.cars.push(newCar)
   }
@@ -30,8 +32,11 @@ class CarsService {
     // NOTE logger is similar to console, will not break your application during deployment
     logger.log('GOT CARS 🚗', response.data);
 
-    // reverses arrary order
+    // reverses array order
+    // since the API sends data sorted by oldest entries first, the array now has the newest entries first
+    // REVIEW not something necessary
     response.data.reverse()
+
     AppState.cars = response.data.map(pojo => new Car(pojo))
   }
 }
