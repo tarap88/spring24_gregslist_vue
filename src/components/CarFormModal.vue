@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import Pop from '../utils/Pop.js';
 import { carsService } from '../services/CarsService.js';
 
+// NOTE allows us to v-for over this array for options
 const engineTypes = [
   "unknown",
   "2 stroke",
@@ -43,9 +44,11 @@ async function createCar() {
         </div>
         <div class="modal-body">
 
+          <!-- NOTE .prevent is the equivalent of event.preventDefault() -->
           <form @submit.prevent="createCar()">
 
             <div class="form-floating mb-3">
+              <!-- NOTE sets up 2-way-data-binding with a property inside of the ref object -->
               <input v-model="editableCarData.make" type="text" class="form-control" id="carMake" placeholder="Car Make"
                 required maxlength="500">
               <label for="carMake">Car Make</label>
@@ -92,7 +95,6 @@ async function createCar() {
               <label for="carEngine">Car Engine</label>
               <select v-model="editableCarData.engineType" class="form-select" id="carEngine"
                 aria-label="Default select example">
-                <!-- FIXME fix the value! -->
                 <option v-for="engineType in engineTypes" :key="engineType" :value="engineType">
                   {{ engineType }}
                 </option>
@@ -101,7 +103,6 @@ async function createCar() {
 
             <div class="text-end">
               <button class="btn btn-success" type="submit">Submit</button>
-
             </div>
           </form>
 

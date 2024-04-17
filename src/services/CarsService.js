@@ -4,8 +4,8 @@ import { logger } from "../utils/Logger.js";
 import { api } from "./AxiosService.js"
 
 class CarsService {
-  async createCar(editableCarData) {
-    const response = await api.post('api/cars', editableCarData)
+  async createCar(carData) {
+    const response = await api.post('api/cars', carData)
     logger.log('CREATED CAR 🚓🔧', response.data)
   }
   async getCars() {
